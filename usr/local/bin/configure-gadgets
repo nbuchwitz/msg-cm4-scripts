@@ -2,7 +2,6 @@
 
 teardown() {
    umount "${CONFIGFS}" > /dev/null 2>&1
-   rmmod libcomposite > /dev/null 2>&1
    rmdir "${CONFIGFS}"
 }
 
@@ -20,7 +19,6 @@ if lspci | grep -iq "USB Controller"; then
 fi
 
 mkdir -p "${CONFIGFS}"
-modprobe libcomposite
 mount none "${CONFIGFS}" -t configfs
 cd "${CONFIGFS}/usb_gadget"
 mkdir -p rpimsg
