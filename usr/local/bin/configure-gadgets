@@ -10,6 +10,12 @@ if [ -d "${CONFIGFS}" ]; then
    teardown || true
 fi
 
+# Disable activity LED, otherwise eMMC will be disabled on CM3
+if [ -e /sys/class/leds/led0 ]; then
+	echo none > /sys/class/leds/led0/trigger
+	echo 0 > /sys/class/leds/led0/brightness
+fi
+
 if lspci | grep -iq "USB Controller"; then
    # For slow to init drives it might be better to use udev events
    # However, that's unecessary complexity for a rare use-case
