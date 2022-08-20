@@ -52,15 +52,3 @@ done
 ls /sys/class/udc > UDC
 
 echo "Mass storage gadget init complete"
-act_led=/sys/class/leds/led0
-echo none > ${act_led}/trigger
-count=0
-while [ $count -lt 3 ]
-do
-   echo 0 > ${act_led}/brightness
-   sleep 0.2
-   echo 255 > ${act_led}/brightness
-   sleep 0.2
-   count=$((count + 1))
-done
-echo "default-on" > ${act_led}/trigger
